@@ -8,7 +8,9 @@ const { requireSignin, isAdmin } = require("../middlewares/auth.js");
 
 // controllers
 const { register, login, secret, updateProfile } = require("../controllers/auth.js");
-
+router.get("/status",(req,res)=>{
+    res.send("server is running");
+});
 router.post("/register", register);
 router.post("/login", login);
 

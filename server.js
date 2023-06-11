@@ -19,9 +19,13 @@ app.use(helmet())
 
 
 // routes middleware
-readdirSync("./routes").map(r => app.use("/api/v1", require(`./routes/${r}`))) 
-
-
+// readdirSync("./routes").map(r => app.use("/api/v1", require(`./routes/${r}`))) 
+app.use("/",(req,res)=>{
+ res.send("home page");
+})
+app.use((req,res)=>{
+    res.send("route not found");
+  })
 
 
 // server
@@ -31,7 +35,9 @@ const port = process.env.PORT || 8000;
 mongoose
     .connect(process.env.DATABASE)
     .then(() => {
+        console.log("mongoDB");
         app.listen(port, () => {
+            console.log("server");
             console.log(`Server Running on port ${port}`);
         });
     })
